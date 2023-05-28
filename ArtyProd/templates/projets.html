@@ -1,0 +1,186 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <title>Projets</title>
+
+        <!-- CSS FILES -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+
+        <link href="{% static 'css/bootstrap.min.css'%}" rel="stylesheet">
+        <link href="{% static 'css/bootstrap-icons.css'%}" rel="stylesheet">
+
+        <link rel="stylesheet" href="{% static ' css/slick.css' %}"/>
+
+        <link href="{%  static 'css/tooplate-little-fashion.css' %}" rel="stylesheet">
+        <!-- 
+
+           Tooplate 2127 Little Fashion
+
+           https://www.tooplate.com/view/2127-little-fashion
+
+            -->
+    </head>
+    
+    <body>
+
+        <section class="preloader">
+            <div class="spinner">
+                <span class="sk-inner-circle"></span>
+            </div>
+        </section>
+    
+        <main>
+            <nav class="navbar navbar-expand-lg">
+                <div class="container">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <strong><span>Arty</span> Prod</strong>
+                    </a>
+                    <div class="d-lg-none">
+                        <a href="sign-in.html" class="bi-person custom-icon me-3"></a>
+
+                        <a href="product-detail.html" class="bi-bag custom-icon"></a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item">
+                                <a class="nav-link " href="{% url 'index' %}">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'team' %}">Team</a>
+                            </li>
+                            {% if username %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'projets' %}">My Projects</a>
+                            </li>
+                        {% endif %}
+                         {% if username %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'demande' %}">Get project</a>
+                            </li>
+                        {% endif %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                            </li>
+                            {% if username %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">{{username}}</a>
+                            </li>
+                        </ul>
+                        <div class="d-none d-lg-block">
+                            <form action="{% url 'logout' %}">
+                                <button type="submit"><i class="bi bi-box-arrow-right"></i></button> 
+                                
+                            </form>
+
+                            {% else %}
+                            <a href="{% url 'login1' %}" class="bi-person custom-icon me-3"></a> 
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+            <section class="featured-product section-padding">
+                <div class="container">
+                    <div class="row">
+                        
+                        <div class="col-12 text-center">
+                            <h2 class="mb-5">Demandes Liste </h2>
+                        </div>
+
+                        <form class="contact-form me-lg-5 pe-lg-3" role="form" method="post" action="{% url 'demande_detail' %}">
+
+                        {% for d in demandes %}
+                        <div class="col-lg-4 col-12">
+
+                              <div class="product-thumb">
+                                    <img src="{{d.image.url}}" class="img-fluid product-image" alt="">
+                              </div>      
+                                        Id Du Projet :
+
+                                        <h5 class="product-title mb-0">
+                                            {{d.id}}
+                                        </h5>
+
+                                        Nom Du Client :
+                                        
+                                        <h5 class="product-title mb-0">
+                                            {{d.client_name}}
+                                        </h5>
+
+                                        Type Du Projet :
+
+                                        <h5 class="product-title mb-0">
+                                           {{d.Type}}
+                                        </h5>
+                                        
+                                        <form action="{% url 'demande_detail' %}">
+                                            <button type="button" class="btn btn-primary" >Détails</button>
+                                            
+                                        </form>
+                            </div>
+                       
+                        </form>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-10 me-auto mb-4">
+                        <h4 class="text-white mb-3"><a href="#">Arty</a> Prod</h4>
+                        <p class="copyright-text text-muted mt-lg-5 mb-4 mb-lg-0">Copyright © 2023 <strong>Arty Prod</strong></p>
+                        <br>
+                    </div>
+                    <div class="col-lg-3 col-10 me-auto mb-4">
+                        <h4 class="text-white mb-3"><a href="#">Azouzi </a>Mohamed  Ali</h4>
+                        
+                    </div>
+                    <div class="col-lg-3 col-4">
+                        <h5 class="text-white mb-3">Social</h5>
+
+                        <ul class="social-icon">
+
+                            <li><a href="#" class="social-icon-link bi-youtube"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-whatsapp"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-instagram"></a></li>
+
+                            <li><a href="#" class="social-icon-link bi-skype"></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+        <!-- JAVASCRIPT FILES -->
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/Headroom.js' %}"></script>
+        <script src="{% static 'js/jQuery.headroom.js'%} "></script>
+        <script src="{% static 'js/slick.min.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+
+    </body>
+</html>
